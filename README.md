@@ -15,5 +15,7 @@ docker compose up -d
 ```
 
 Geoserver will run in the port 8080
+
 Postgres will run in the port 5432
+
 The front end will run in the port 80
