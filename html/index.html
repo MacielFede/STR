@@ -1,0 +1,27 @@
+html:
+    index.html: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>GeoServer API Test</title>
+          <script>
+              async function fetchGeoServerData() {
+                  try {
+                      let response = await fetch('http://localhost:80/geoserver/wfs?request=GetCapabilities');
+                      let text = await response.text();
+                      document.getElementById('output').textContent = text;
+                  } catch (error) {
+                      document.getElementById('output').textContent = 'Error fetching data';
+                  }
+              }
+          </script>
+      </head>
+      <body>
+          <h1>GeoServer API Test</h1>
+          <button onclick="fetchGeoServerData()">Fetch GeoServer Data</button>
+          <pre id="output"></pre>
+      </body>
+      </html>
+
