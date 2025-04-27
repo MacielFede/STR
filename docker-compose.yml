@@ -27,8 +27,6 @@ services:
       - POSTGRES_PASSWORD=geopass
     ports:
       - "5432:5432"
-    volumes:
-      - ./postgis_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   nginx:
