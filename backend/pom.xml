@@ -11,7 +11,7 @@
 	<groupId>com.tecnoinf</groupId>
 	<artifactId>str</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sistema de Transporte Rural</name>
+	<name>Sistema de Transporte Nacional</name>
 	<description>Geografic system for bus stops in Uruguay</description>
 	<url/>
 	<licenses>
@@ -30,6 +30,25 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+<dependency>
+  <groupId>com.bedatadriven</groupId>
+  <artifactId>jackson-datatype-jts</artifactId>
+    <version>2.4</version>
+</dependency>
+<dependency>
+  <groupId>org.locationtech.jts</groupId>
+  <artifactId>jts-core</artifactId>
+  <version>1.19.0</version>
+</dependency>
+<dependency>
+  <groupId>org.hibernate</groupId>
+  <artifactId>hibernate-spatial</artifactId>
+  <version>6.4.4.Final</version>
+</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
