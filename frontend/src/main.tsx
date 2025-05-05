@@ -12,6 +12,7 @@ import {
 import './styles.css'
 
 import Map from './screens/Map.tsx'
+import MapPoly from './screens/MapPoly.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -34,7 +35,13 @@ const adminRoute = createRoute({
   component: Map,
 })
 
-const routeTree = rootRoute.addChildren([mapRoute, adminRoute])
+const mapPolyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/mappoly',
+  component: MapPoly,
+})
+
+const routeTree = rootRoute.addChildren([mapRoute, adminRoute, mapPolyRoute])
 
 const router = createRouter({
   routeTree,
