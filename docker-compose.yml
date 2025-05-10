@@ -1,11 +1,11 @@
-version: '3.8'
+version: "3.8"
 
 services:
   geoserver:
     image: docker.osgeo.org/geoserver:2.26.2
     container_name: geoserver
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
       - GEOSERVER_DATA_DIR=/var/local/geoserver
       - POSTGIS_HOST=postgis
@@ -29,6 +29,14 @@ services:
       - "5432:5432"
     restart: unless-stopped
 
+  backend-stn:
+    build:
+      context: /backend             # Directorio donde está el Dockerfile
+      dockerfile: Dockerfile # (opcional si se llama Dockerfile)
+    ports:
+      - "8080:8080"          # Mapear el puerto del contenedor al host
+    container_name: backend-stn
+
   nginx:
     image: nginx:latest
     container_name: nginx
@@ -40,9 +48,6 @@ services:
     networks:
       - red01
     restart: unless-stopped
-volumes:
-  geoserver_data:
-  postgis_data:
 networks:
   red01:
     driver: bridge

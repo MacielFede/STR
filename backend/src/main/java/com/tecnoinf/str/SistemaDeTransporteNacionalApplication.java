@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SistemaDeTransporteRuralApplication {
+public class SistemaDeTransporteNacionalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SistemaDeTransporteRuralApplication.class, args);
+		SpringApplication.run(SistemaDeTransporteNacionalApplication.class, args);
 	}
 
 }
