@@ -7,29 +7,34 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import './styles.css'
-import reportWebVitals from './reportWebVitals.ts'
 
-import App from './App.tsx'
+import Map from './screens/Map.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
     <>
       <Outlet />
-      <TanStackRouterDevtools />
+      {/* <TanStackRouterDevtools /> */}
     </>
   ),
 })
 
-const indexRoute = createRoute({
+const mapRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: App,
+  component: Map,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute])
+const adminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/admin/',
+  component: Map,
+})
+
+const routeTree = rootRoute.addChildren([mapRoute, adminRoute])
 
 const router = createRouter({
   routeTree,
@@ -55,8 +60,3 @@ if (rootElement && !rootElement.innerHTML) {
     </StrictMode>,
   )
 }
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
