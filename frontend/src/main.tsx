@@ -12,6 +12,7 @@ import {
 import './styles.css'
 
 import Map from './screens/Map.tsx'
+import { LoginForm } from './screens/LoginForm.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -31,7 +32,7 @@ const mapRoute = createRoute({
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin/',
-  component: Map,
+  component: LoginForm,
 })
 
 const routeTree = rootRoute.addChildren([mapRoute, adminRoute])
