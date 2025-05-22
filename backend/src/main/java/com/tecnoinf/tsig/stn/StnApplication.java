@@ -1,13 +1,13 @@
-package com.tecnoinf.str;
+package com.tecnoinf.tsig.stn;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SistemaDeTransporteNacionalApplication {
+public class StnApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SistemaDeTransporteNacionalApplication.class, args);
+		SpringApplication.run(StnApplication.class, args);
 	}
 
 }

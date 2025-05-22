@@ -26,15 +26,16 @@ services:
       - POSTGRES_USER=geouser
       - POSTGRES_PASSWORD=geopass
     ports:
-      - "5432:5432"
+      - "5433:5432"
     restart: unless-stopped
 
   backend-stn:
     build:
-      context: /backend             # Directorio donde está el Dockerfile
-      dockerfile: Dockerfile # (opcional si se llama Dockerfile)
+      context: /backend
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"          # Mapear el puerto del contenedor al host
+      - "8080:8080"
+      - "5005:5005"
     container_name: backend-stn
 
   nginx:
