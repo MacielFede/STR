@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import 'leaflet/dist/leaflet.css'
 import '../styles/Map.css'
+import { CircleMarker } from 'react-leaflet'
 
 const Map = () => {
-  const [position, setPosition] = useState<[number, number] | null>(null)
+  const [position, setPosition] = useState<[number, number]>([-34.9011, -56.1645])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -14,24 +17,46 @@ const Map = () => {
       },
       (err) => {
         console.error('Error obteniendo ubicación:', err)
-        // Fallback a una ubicación por defecto si falla
-        setPosition([-34.9011, -56.1645]) 
+
+        // Mostrar toast de error
+        toast.error('❌ No se pudo determinar su ubicación', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        })
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
       }
     )
   }, [])
 
-  if (!position) return <p>Cargando mapa...</p>
-
   return (
-    <MapContainer center={position} zoom={13}  className="leaflet-container">
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="&copy; OpenStreetMap contributors"
-      />
-      {/* <Marker position={position}>
-        <Popup>Estás aquí</Popup>
-      </Marker> */}
-    </MapContainer>
+    <>
+      <MapContainer center={position} zoom={13} className="leaflet-container">
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="&copy; OpenStreetMap contributors"
+        />
+        {<CircleMarker
+  center={position}
+  radius={80} // en píxeles
+  pathOptions={{ color: 'skyblue', fillColor: 'skyblue', fillOpacity: 0.2 }}
+>
+  <Popup>Estás aquí</Popup>
+</CircleMarker>}
+      </MapContainer>
+
+     
+      <ToastContainer />
+    </>
   )
 }
 
