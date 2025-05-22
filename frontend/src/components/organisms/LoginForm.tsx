@@ -10,12 +10,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+type LoginFormProps = React.ComponentProps<'div'> & {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>
+}
+
 export function LoginForm({
   className,
+  handleSubmit,
   ...props
-}: React.ComponentProps<'div'>) {
+}: LoginFormProps) {
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className={cn('flex flex-col gap-6 w-[50vw]', className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle>Administrador</CardTitle>
@@ -25,7 +30,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
@@ -33,6 +38,8 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -40,7 +47,13 @@ export function LoginForm({
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  // value={password}
+                  // onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
               </div>
               <Button type="submit" className="w-full">
                 Login

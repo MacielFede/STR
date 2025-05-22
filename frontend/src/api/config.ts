@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:8080'
+const backendBaseURL = 'http://localhost:8080/api'
+// const geoserverBaseURL = 'http://localhost:8080'
 
-const api = axios.create({ baseURL })
+const api = axios.create({ baseURL: backendBaseURL })
 
 export default api

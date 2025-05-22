@@ -11,8 +11,9 @@ import {
 
 import './styles.css'
 
-import Map from './screens/Map.tsx'
-import { LoginForm } from './screens/LoginForm.tsx'
+import { CookiesProvider } from 'react-cookie'
+import EndUserMap from './screens/EndUserMap.tsx'
+import AdminMap from './screens/AdminMap.tsx'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -26,13 +27,13 @@ const rootRoute = createRootRoute({
 const mapRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: Map,
+  component: EndUserMap,
 })
 
 const adminRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin/',
-  component: LoginForm,
+  component: AdminMap,
 })
 
 const routeTree = rootRoute.addChildren([mapRoute, adminRoute])
@@ -57,7 +58,9 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <CookiesProvider defaultSetOptions={{ path: '/' }}>
+        <RouterProvider router={router} />
+      </CookiesProvider>
     </StrictMode>,
   )
 }
