@@ -15,7 +15,7 @@ const Map = () => {
       (err) => {
         console.error('Error obteniendo ubicación:', err)
         // Fallback a una ubicación por defecto si falla
-        setPosition([-34.9011, -56.1645]) // Buenos Aires, por ejemplo
+        setPosition([-34.9011, -56.1645]) 
       }
     )
   }, [])
