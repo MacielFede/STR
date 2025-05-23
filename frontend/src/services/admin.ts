@@ -17,6 +17,6 @@ export const login = async (email: string, password: string) => {
       username: email,
       password,
     })
-
-  return data.data
+    console.log(data.data?.token)
+  return data
 }
