@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.DT-Store
 ### STS ###
 .apt_generated
 .classpath
@@ -34,4 +35,3 @@ build/
 ### Secrets ###
 src/main/resources/application-secrets.properties
 */.DS-Store
-.DT-Store

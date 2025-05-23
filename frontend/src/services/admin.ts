@@ -3,9 +3,8 @@ import api from '@/api/config'
 
 export type Response<T> = {
   message?: string
-  data?: T
-  errors?: Error
-}
+  errors?: Error,
+} & T
 
 export type LoginTransactionResponse = {
   token: string
@@ -17,6 +16,6 @@ export const login = async (email: string, password: string) => {
       username: email,
       password,
     })
-    console.log(data.data?.token)
+    console.log(data)
   return data
 }
