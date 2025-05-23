@@ -28,7 +28,7 @@ public class BusLineController {
         return ResponseEntity.ok(busLineService.update(id, request));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         busLineService.delete(id);
         return ResponseEntity.noContent().build();

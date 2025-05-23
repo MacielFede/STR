@@ -7,7 +7,9 @@ import com.tecnoinf.tsig.stn.model.BusLine;
 import com.tecnoinf.tsig.stn.model.Company;
 import com.tecnoinf.tsig.stn.repository.BusLineRepository;
 import com.tecnoinf.tsig.stn.repository.CompanyRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class BusLineService {
     }
 
     public BusLineResponse create(CreateBusLineRequest request) {
-        Company company = companyRepository.findById(request.companyId()).orElseThrow(() -> new RuntimeException("Company not found"));
+        Company company = companyRepository.findById(request.companyId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found"));
 
         BusLine busLine = new BusLine();
         busLine.setNumber(request.number());
@@ -35,9 +37,9 @@ public class BusLineService {
     }
 
     public BusLineResponse update(Long id, UpdateBusLineRequest request) {
-        BusLine busLine = busLineRepository.findById(id).orElseThrow(() -> new RuntimeException("BusLine not found"));
+        BusLine busLine = busLineRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Bus line not found"));
 
-        Company company = companyRepository.findById(request.companyId()).orElseThrow(() -> new RuntimeException("Company not found"));
+        Company company = companyRepository.findById(request.companyId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found"));
 
         busLine.setNumber(request.number());
         busLine.setStatus(request.status());
@@ -48,6 +50,9 @@ public class BusLineService {
     }
 
     public void delete(Long id) {
+        if (!busLineRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Bus line not found");
+        }
         busLineRepository.deleteById(id);
     }
 
