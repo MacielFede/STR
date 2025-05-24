@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import '../styles/Map.css'
 import { CircleMarker } from 'react-leaflet'
 
-const Map = () => {
+function EndUserMap  ()  {
   const [position, setPosition] = useState<[number, number]>([-34.9011, -56.1645])
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Map = () => {
         console.error('Error obteniendo ubicación:', err)
 
         // Mostrar toast de error
-        toast.error('❌ No se pudo determinar su ubicación', {
+        toast.error('No se pudo determinar su ubicación', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -31,7 +31,7 @@ const Map = () => {
         })
       },
       {
-        enableHighAccuracy: true,
+        //enableHighAccuracy: true,
         timeout: 10000,
         maximumAge: 0,
       }
@@ -55,9 +55,9 @@ const Map = () => {
       </MapContainer>
 
      
-      <ToastContainer />
+
     </>
   )
 }
 
-export default Map
+export default EndUserMap
