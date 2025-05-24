@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import '../styles/Map.css'
+import '../../styles/Map.css'
 
 function EndUserMap() {
   return (

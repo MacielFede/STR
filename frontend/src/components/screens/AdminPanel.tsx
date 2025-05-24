@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 import 'leaflet/dist/leaflet.css'
-import '../styles/Map.css'
+import '../../styles/Map.css'
 import { useCookies } from 'react-cookie'
 import { LoginForm } from '@/components/organisms/LoginForm'
 import { login } from '@/services/admin'
