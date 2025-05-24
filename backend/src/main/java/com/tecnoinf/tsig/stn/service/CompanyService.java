@@ -3,8 +3,11 @@ package com.tecnoinf.tsig.stn.service;
 import com.tecnoinf.tsig.stn.dto.CompanyRequest;
 import com.tecnoinf.tsig.stn.dto.CompanyResponse;
 import com.tecnoinf.tsig.stn.model.Company;
+import com.tecnoinf.tsig.stn.repository.BusLineRepository;
 import com.tecnoinf.tsig.stn.repository.CompanyRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,9 +15,11 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyService {
     private final CompanyRepository companyRepository;
+    private final BusLineRepository busLineRepository;
 
-    public CompanyService(CompanyRepository repository) {
-        this.companyRepository = repository;
+    public CompanyService(CompanyRepository companyRepository, BusLineRepository busLineRepository) {
+        this.companyRepository = companyRepository;
+        this.busLineRepository = busLineRepository;
     }
 
     public CompanyResponse create(CompanyRequest request) {
@@ -30,7 +35,7 @@ public class CompanyService {
     }
 
     public CompanyResponse update(Long id, CompanyRequest request) {
-        Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+        Company company = companyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found"));
 
         company.setName(request.name());
         Company updatedCompany = companyRepository.save(company);
@@ -39,7 +44,10 @@ public class CompanyService {
     }
 
     public void delete(Long id) {
-        if (!companyRepository.existsById(id)) throw new RuntimeException("Company not found");
+        if (!companyRepository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found");
+        if (busLineRepository.existsByCompanyId(id))
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot delete company with existing bus lines");
 
         companyRepository.deleteById(id);
     }
