@@ -29,7 +29,7 @@ services:
 
   backend-stn:
     build:
-      context: /backend
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
