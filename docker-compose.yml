@@ -12,8 +12,6 @@ services:
       - POSTGIS_DB=geodb
       - POSTGIS_USER=geouser
       - POSTGIS_PASSWORD=geopass
-    networks:
-      - red01
     depends_on:
       - postgis
     restart: unless-stopped
@@ -46,9 +44,4 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./html:/usr/share/nginx/html:ro
-    networks:
-      - red01
     restart: unless-stopped
-networks:
-  red01:
-    driver: bridge
